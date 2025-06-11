@@ -80,7 +80,11 @@ define(['N/search', 'N/email', 'N/file', 'N/log'],
                         "AND",
                         ["mainline", "is", "T"],
                         "AND",
-                        ["trandate", "onorbefore", "lastmonth"]
+                        ["trandate", "onorbefore", "lastmonth"],
+                        "AND",
+                        ["customermain.isinactive","is","F"], 
+                        "AND", 
+                        ["employee.isinactive","is","F"]
                     ],
                     columns: [
                         search.createColumn({ name: "entity", label: "Name" }),
@@ -128,14 +132,14 @@ define(['N/search', 'N/email', 'N/file', 'N/log'],
          * @returns {Object} The generated CSV file and metadata.
          */
         const generateCSVFile = (invoiceDataList) => {
-            let csvContent = "";
+            let csvContent = "Customer name,Email,Document number,Amount,Days Overdue\n";
             let csvName = "";
             let rep = "";
             let customer = "";
 
             invoiceDataList.forEach(data => {
-                csvContent += `Customer name: ${data.customerName}, Email: ${data.customerEmail}, Document number: ${data.documentNo},
-                 Amount: ${data.invoiceAmount}, Days Overdue: ${data.daysOverdue} \n`;
+                csvContent += `${data.customerName},${data.customerEmail},  ${data.documentNo},
+                ${data.invoiceAmount}, ${data.daysOverdue} \n`;
                 csvName = `Days Overdue ${data.customerName}.csv`;
                 rep = data.salesRep;
                 customer = data.customerName;
