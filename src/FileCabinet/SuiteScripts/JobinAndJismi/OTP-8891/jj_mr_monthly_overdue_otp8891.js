@@ -134,7 +134,8 @@ define(['N/search', 'N/email', 'N/file', 'N/log'],
             let customer = "";
 
             invoiceDataList.forEach(data => {
-                csvContent += `Customer name: ${data.customerName}, Email: ${data.customerEmail}, Document number: ${data.documentNo}, Amount: ${data.invoiceAmount}, Days Overdue: ${data.daysOverdue} \n`;
+                csvContent += `Customer name: ${data.customerName}, Email: ${data.customerEmail}, Document number: ${data.documentNo},
+                 Amount: ${data.invoiceAmount}, Days Overdue: ${data.daysOverdue} \n`;
                 csvName = `Days Overdue ${data.customerName}.csv`;
                 rep = data.salesRep;
                 customer = data.customerName;
